@@ -1,19 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Cart } from '../../cart/entities/cart.entity';
 import { Order } from '../../order/entities/order.entity';
 
-@Entity()
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ name: 'name', type: 'varchar' })
     name: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, type: 'varchar' })
     email: string;
 
-    @Column()
+    @Column({ name: 'password', type: 'varchar' })
     password: string;
 
     @OneToMany(() => Cart, (cart) => cart.user)

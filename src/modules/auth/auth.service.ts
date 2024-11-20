@@ -21,13 +21,19 @@ export class AuthService {
         email: string,
         password: string,
     ): Promise<{ accessToken: string }> {
+        // Fetch user by email
         const user = await this.userService.findByEmail(email);
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
             throw new UnauthorizedException('Invalid email or password');
         }
 
-        const payload = { sub: user.id, email: user.email };
+        const payload = {
+            userId: user.id,
+            email: user.email,
+        };
+
+        // Generate the JWT
         const accessToken = this.jwtService.sign(payload);
 
         return { accessToken };

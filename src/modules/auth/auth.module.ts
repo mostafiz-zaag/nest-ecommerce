@@ -9,8 +9,8 @@ import { AuthController } from './auth.controller';
     imports: [
         UserModule,
         JwtModule.register({
-            secret: 'your-secret-key',
-            signOptions: { expiresIn: '1h' },
+            secret: 'hello-ecommerce',
+            signOptions: { expiresIn: '24h' },
         }),
     ],
     controllers: [AuthController],
